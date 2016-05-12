@@ -1,0 +1,27 @@
+{
+    "id": "/{{ environment }}/apis/expense-type/{{ version }}",
+    "cpus": {{ cpus }},
+    "mem": {{ mem }},
+    "instances": {{ instances }},
+    "cmd": "python Type_Server.py",
+    "container": {
+        "type": "DOCKER",
+        "docker": {
+            "image": "{{ image }}:{{ version }}",
+            "network": "BRIDGE",
+            "portMappings": [
+                {"containerPort": 8889, "hostPort": 0, "protocol": "tcp"}
+            ]
+        },
+        "volumes": [
+            {
+                "containerPath": "/opt/api/models",
+                "hostPath": "models",
+                "mode": "RO"
+            },    
+        ]
+    },
+    "uris": [
+        "https://artifactory.concurtech.net/artifactory/ext-util-selfserve-local/datascience/expense-type/data/v1/intermediate.tar.gz",
+    ]
+}
